@@ -5,42 +5,53 @@
  * The offset div takes up the space that would otherwise be occupied by subsequent elements.
  */
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 import SignoutButton from "../SignoutButton";
 
 const NavbarMain = () => {
-  const auth = useSelector((state) => state.auth);
-  return (
-    <nav className="Navbar">
-      <div className="inner container is-fixed">
-        <NavLink exact activeClassName="active" className="no-deco" to="/">
-          Home
-        </NavLink>
-        <NavLink exact activeClassName="active" className="no-deco" to="/dashboard">
-          Dashboard
-        </NavLink>
-        <NavLink exact activeClassName="active" className="no-deco" to="/another">
-          Another Private Page
-        </NavLink>
-        {auth.isAuthenticated ? (
-          <React.Fragment>
-            <SignoutButton />
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <NavLink exact activeClassName="active" className="no-deco" to="/signin">
-              Sign In
-            </NavLink>
-            <NavLink exact activeClassName="active" className="no-deco" to="/signup">
-              Sign Up
-            </NavLink>
-          </React.Fragment>
-        )}
-      </div>
-    </nav>
-  );
+	const auth = useSelector((state) => state.auth);
+	return (
+		<nav className="navbar navbar-light bg-light">
+			<div class="container-fluid">
+				<NavLink
+					exact
+					activeClassName="active"
+					className="navbar-brand"
+					to="/"
+				>
+					PERN
+				</NavLink>
+				<form class="d-flex">
+					{auth.isAuthenticated ? (
+						<React.Fragment>
+							<SignoutButton />
+						</React.Fragment>
+					) : (
+						<React.Fragment>
+							<NavLink
+								exact
+								activeClassName="active"
+								className="btn btn-outline-danger me-2"
+								to="/signin"
+							>
+								Sign In
+							</NavLink>
+							<NavLink
+								exact
+								activeClassName="active"
+								className="btn btn-outline-primary"
+								to="/signup"
+							>
+								Sign Up
+							</NavLink>
+						</React.Fragment>
+					)}
+				</form>
+			</div>
+		</nav>
+	);
 };
 
 export default NavbarMain;
